@@ -221,30 +221,25 @@ INSERT INTO product_category (product_id, category_id) VALUES
 
 INSERT INTO fee_rule (fee_rule_id, fee_name, fee_type, fee_value, min_amount, max_amount, is_active) VALUES
   (1,  'Taxa padrão marketplace',    'PERCENTAGE', 12.00, 2.00,  500.00, TRUE),
-  (2,  'Taxa eletrônicos',           'PERCENTAGE', 10.00, 5.00, 1000.00, TRUE),
-  (3,  'Taxa moda',                  'PERCENTAGE', 15.00, 1.50,  300.00, TRUE),
-  (4,  'Taxa casa & jardim',         'PERCENTAGE', 13.00, 2.00,  400.00, TRUE),
-  (5,  'Taxa esportes',              'PERCENTAGE', 14.00, 2.00,  350.00, TRUE),
-  (6,  'Taxa fixa antifraude',       'FIXED',       1.50, NULL,    NULL, TRUE),
-  (7,  'Taxa processamento Pix',     'FIXED',       0.00, NULL,    NULL, TRUE),
-  (8,  'Taxa processamento boleto',  'FIXED',       3.50, NULL,    NULL, TRUE),
-  (9,  'Taxa processamento cartão',  'PERCENTAGE',  2.50, 0.50,    NULL, TRUE),
-  (10, 'Taxa promocional Q1 2024',   'PERCENTAGE',  8.00, 1.00,  200.00, FALSE);
+  (2,  'Taxa processamento Pix',     'FIXED',       0.00, NULL,    NULL, TRUE),
+  (3,  'Taxa processamento boleto',  'FIXED',       3.50, NULL,    NULL, TRUE),
+  (4,  'Taxa processamento cartão',  'PERCENTAGE',  2.50, 0.50,    NULL, TRUE),
+  (5,  'Taxa promocional Q1 2024',   'PERCENTAGE',  8.00, 1.00,  200.00, FALSE);
 
 -- =============================================================================
 -- SUB-DOMAIN: ORDER — orders
 -- 10 pedidos de 7 clientes em diferentes estados
--- delivery_address_id referencia address.address_id (enforced by application)
+-- delivery_address_id referencia order_address.address_id (enforced by application)
 -- =============================================================================
 
 INSERT INTO orders (order_id, customer_id, delivery_address_id, order_status, total_amount, created_at) VALUES
   (1,  1, 1,  'DELIVERED',  6798.00, '2024-01-15 09:45:00'),
-  (2,  2, 3,  'SHIPPED',    4328.90, '2024-01-18 14:00:00'),
-  (3,  3, 4,  'PROCESSING',  114.70, '2024-01-20 11:30:00'),
+  (2,  2, 3,  'SHIPPED',    4299.00, '2024-01-18 14:00:00'),
+  (3,  3, 4,  'PROCESSING',  94.80, '2024-01-20 11:30:00'),
   (4,  4, 5,  'PAID',       7999.00, '2024-02-01 19:00:00'),
   (5,  5, 6,  'CREATED',     638.00, '2024-02-10 08:20:00'),
-  (6,  6, 7,  'DELIVERED',   568.90, '2024-02-10 11:00:00'),
-  (7,  7, 8,  'PROCESSING', 4598.00, '2024-02-15 16:00:00'),
+  (6,  6, 7,  'DELIVERED',   549.00, '2024-02-10 11:00:00'),
+  (7,  7, 8,  'PROCESSING', 4798.00, '2024-02-15 16:00:00'),
   (8,  1, 2,  'DELIVERED',   348.90, '2024-03-01 10:00:00'),
   (9,  3, 4,  'CANCELLED',  1699.00, '2024-03-05 15:00:00'),
   (10, 2, 9,  'PAID',       2199.00, '2024-03-10 17:30:00');
@@ -351,12 +346,12 @@ INSERT INTO order_status_history (order_id, order_status, changed_at) VALUES
 
 INSERT INTO payment (payment_id, order_id, amount, payment_status, created_at) VALUES
   (1,  1,  6798.00, 'PAID',    '2024-01-15 09:50:00'),
-  (2,  2,  4328.90, 'PAID',    '2024-01-18 14:10:00'),
-  (3,  3,   114.70, 'PAID',    '2024-01-23 08:00:00'),
+  (2,  2,  4299.00, 'PAID',    '2024-01-18 14:10:00'),
+  (3,  3,   94.80, 'PAID',    '2024-01-23 08:00:00'),
   (4,  4,  7999.00, 'PAID',    '2024-02-01 19:05:00'),
   (5,  5,   638.00, 'PENDING', '2024-02-10 08:20:00'),
-  (6,  6,   568.90, 'PAID',    '2024-02-10 11:02:00'),
-  (7,  7,  4598.00, 'PAID',    '2024-02-15 16:05:00'),
+  (6,  6,   549.00, 'PAID',    '2024-02-10 11:02:00'),
+  (7,  7,  4798.00, 'PAID',    '2024-02-15 16:05:00'),
   (8,  8,   348.90, 'PAID',    '2024-03-01 10:02:00'),
   (9,  9,  1699.00, 'REFUNDED','2024-03-05 16:00:00'),
   (10, 10, 2199.00, 'PAID',    '2024-03-10 17:35:00');
@@ -368,12 +363,12 @@ INSERT INTO payment (payment_id, order_id, amount, payment_status, created_at) V
 
 INSERT INTO charge (charge_id, payment_id, amount, payment_method, charge_status, gateway_ref, created_at) VALUES
   (1,  1,  6798.00, 'PIX',         'PAID',       'PIX-20240115-0001', '2024-01-15 09:50:00'),
-  (2,  2,  4328.90, 'CREDIT_CARD', 'PAID',       'TXN-20240118-0002', '2024-01-18 14:10:00'),
-  (3,  3,   114.70, 'BOLETO',      'PAID',       'BOL-20240123-0003', '2024-01-23 08:00:00'),
+  (2,  2,  4299.00, 'CREDIT_CARD', 'PAID',       'TXN-20240118-0002', '2024-01-18 14:10:00'),
+  (3,  3,   94.80, 'BOLETO',      'PAID',       'BOL-20240123-0003', '2024-01-23 08:00:00'),
   (4,  4,  7999.00, 'CREDIT_CARD', 'PAID',       'TXN-20240201-0004', '2024-02-01 19:05:00'),
   (5,  5,   638.00, 'BOLETO',      'PENDING',     NULL,               '2024-02-10 08:20:00'),
-  (6,  6,   568.90, 'PIX',         'PAID',       'PIX-20240210-0006', '2024-02-10 11:02:00'),
-  (7,  7,  4598.00, 'CREDIT_CARD', 'PAID',       'TXN-20240215-0007', '2024-02-15 16:05:00'),
+  (6,  6,   549.00, 'PIX',         'PAID',       'PIX-20240210-0006', '2024-02-10 11:02:00'),
+  (7,  7,  4798.00, 'CREDIT_CARD', 'PAID',       'TXN-20240215-0007', '2024-02-15 16:05:00'),
   (8,  8,   348.90, 'PIX',         'PAID',       'PIX-20240301-0008', '2024-03-01 10:02:00'),
   (9,  9,  1699.00, 'CREDIT_CARD', 'FAILED',     'TXN-20240305-0009', '2024-03-05 15:30:00'),
   (10, 10, 2199.00, 'CREDIT_CARD', 'PAID',       'TXN-20240310-0010', '2024-03-10 17:35:00');
@@ -413,29 +408,29 @@ INSERT INTO charge_status_history (charge_id, charge_status, changed_at) VALUES
 -- =============================================================================
 
 INSERT INTO applied_fee (charge_id, fee_rule_id, amount, created_at) VALUES
-  -- Pedido 1: taxa eletrônicos (10%) + Pix (0)
-  (1,  2, 649.90, '2024-01-15 09:50:00'),
+  -- Pedido 1: taxa padrão marketplace (12%) + Pix (0)
+  (1,  1, 815.76, '2024-01-15 09:50:00'),
   (1,  7,   0.00, '2024-01-15 09:50:00'),
-  -- Pedido 2: taxa eletrônicos (10%) + cartão (2.5%)
-  (2,  2, 432.89, '2024-01-18 14:10:00'),
-  (2,  9, 108.22, '2024-01-18 14:10:00'),
-  -- Pedido 3: taxa moda (15%) + boleto (3.50)
-  (3,  3,  17.21, '2024-01-23 08:00:00'),
-  (3,  8,   3.50, '2024-01-23 08:00:00'),
-  -- Pedido 4: taxa eletrônicos (10%) + cartão (2.5%)
-  (4,  2, 799.90, '2024-02-01 19:05:00'),
+  -- Pedido 2: taxa padrão marketplace (12%) + cartão (2.5%)
+  (2,  1, 515.88, '2024-01-18 14:10:00'),
+  (2,  9, 107.48, '2024-01-18 14:10:00'),
+  -- Pedido 3: taxa padrão marketplace (12%) + boleto (3.5%)
+  (3,  1,  11.38, '2024-01-23 08:00:00'),
+  (3,  8,   3.32, '2024-01-23 08:00:00'),
+  -- Pedido 4: taxa padrão marketplace (12%) + cartão (2.5%)
+  (4,  1, 959.88, '2024-02-01 19:05:00'),
   (4,  9, 199.98, '2024-02-01 19:05:00'),
-  -- Pedido 6: taxa moda (15%) + Pix (0)
-  (6,  3,  82.34, '2024-02-10 11:02:00'),
+  -- Pedido 6: taxa padrão marketplace (12%) + Pix (0)
+  (6,  1,  65.88, '2024-02-10 11:02:00'),
   (6,  7,   0.00, '2024-02-10 11:02:00'),
-  -- Pedido 7: taxa eletrônicos (10%) + cartão (2.5%)
-  (7,  2, 459.80, '2024-02-15 16:05:00'),
-  (7,  9, 114.95, '2024-02-15 16:05:00'),
-  -- Pedido 8: taxa padrão (12%) + Pix (0)
+  -- Pedido 7: taxa padrão marketplace (12%) + cartão (2.5%)
+  (7,  1, 575.76, '2024-02-15 16:05:00'),
+  (7,  9, 119.95, '2024-02-15 16:05:00'),
+  -- Pedido 8: taxa padrão marketplace (12%) + Pix (0)
   (8,  1,  41.87, '2024-03-01 10:02:00'),
   (8,  7,   0.00, '2024-03-01 10:02:00'),
-  -- Pedido 10: taxa eletrônicos (10%) + cartão (2.5%)
-  (10, 2, 219.90, '2024-03-10 17:35:00'),
+  -- Pedido 10: taxa padrão marketplace (12%) + cartão (2.5%)
+  (10, 1, 263.88, '2024-03-10 17:35:00'),
   (10, 9,  54.98, '2024-03-10 17:35:00');
 
 -- =============================================================================
@@ -444,33 +439,13 @@ INSERT INTO applied_fee (charge_id, fee_rule_id, amount, created_at) VALUES
 -- =============================================================================
 
 INSERT INTO settlement (charge_id, amount, installment, settlement_status, settled_at) VALUES
-  -- Pedido 1: Pix — 1 parcela
-  (1,  6798.00, 1, 'SETTLED', '2024-01-15 09:50:05'),
   -- Pedido 2: cartão 6x
-  (2,   721.48, 1, 'SETTLED', '2024-02-18 00:00:00'),
-  (2,   721.48, 2, 'SETTLED', '2024-03-18 00:00:00'),
-  (2,   721.48, 3, 'SETTLED', '2024-04-18 00:00:00'),
-  (2,   721.48, 4, 'PENDING',  NULL),
-  (2,   721.48, 5, 'PENDING',  NULL),
-  (2,   721.50, 6, 'PENDING',  NULL),
-  -- Pedido 3: boleto — 1 parcela
-  (3,   114.70, 1, 'SETTLED', '2024-01-23 08:00:00'),
-  -- Pedido 4: cartão 10x
-  (4,   799.90, 1, 'SETTLED', '2024-03-01 00:00:00'),
-  (4,   799.90, 2, 'SETTLED', '2024-04-01 00:00:00'),
-  (4,   799.90, 3, 'PENDING',  NULL),
-  (4,   799.90, 4, 'PENDING',  NULL),
-  (4,   799.90, 5, 'PENDING',  NULL),
-  -- Pedido 6: Pix — 1 parcela
-  (6,   568.90, 1, 'SETTLED', '2024-02-10 11:02:03'),
-  -- Pedido 7: cartão 3x
-  (7,  1532.67, 1, 'SETTLED', '2024-03-15 00:00:00'),
-  (7,  1532.67, 2, 'PENDING',  NULL),
-  (7,  1532.66, 3, 'PENDING',  NULL),
-  -- Pedido 8: Pix — 1 parcela
-  (8,   348.90, 1, 'SETTLED', '2024-03-01 10:02:04'),
-  -- Pedido 10: cartão 1x
-  (10, 2199.00, 1, 'SETTLED', '2024-04-10 00:00:00');
+  (2,   716.5, 1, 'SETTLED', '2024-02-18 00:00:00'),
+  (2,   716.5, 2, 'SETTLED', '2024-03-18 00:00:00'),
+  (2,   716.5, 3, 'SETTLED', '2024-04-18 00:00:00'),
+  (2,   716.5, 4, 'PENDING',  NULL),
+  (2,   716.5, 5, 'PENDING',  NULL),
+  (2,   716.5, 6, 'PENDING',  NULL),
 
 -- =============================================================================
 -- SUB-DOMAIN: FINANCE — seller_balance
@@ -503,16 +478,4 @@ INSERT INTO payout (payout_id, seller_id, amount, payout_status, created_at) VAL
 
 -- =============================================================================
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
--- =============================================================================
--- FIM DO DATA DUMP
--- Registros inseridos por tabela:
---   user(12), customer(7), seller(5)
---   address(10), seller_address(10)
---   category(13), product(12), product_variant(19), product_image(15)
---   product_category(24)
---   fee_rule(10)
---   orders(10), order_address(10), order_item(15), order_status_history(33)
---   payment(10), charge(10), charge_status_history(23)
---   applied_fee(16), settlement(19)
---   seller_balance(5), payout(10)
 -- =============================================================================

@@ -77,11 +77,11 @@ flowchart LR
 ![Diagrama conceitual](./docs/conceitual/ecommerce-conceitual.svg)
 
 Documentação adicional com informações das tabelas disponível em:
-![Documentação do diagrama conceitual](https://dbdocs.io/luis.coelho.761/ecommerce-conceitual)
+[Documentação do diagrama conceitual](https://dbdocs.io/luis.coelho.761/ecommerce-conceitual)
 
 ## Modelo Entidade-Relacionamento
 
 ![MER](./docs/mer/marketplace_eer.svg)
 
 Documentação em HTML com informações do MER, comentários das tabelas e suas respectivas colunas
-![Documentação do diagrama conceitual](https://dbdocs.io/luis.coelho.761/ecommerce)
+[Documentação do diagrama](https://dbdocs.io/luis.coelho.761/ecommerce)
